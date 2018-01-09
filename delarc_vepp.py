@@ -3,7 +3,7 @@
 import os
 import sys
 import datetime
-from re import match
+# from re import match
 
 
 def hlp():
@@ -18,7 +18,7 @@ def hlp():
 
 def test():
     backupdir = '/media/7dc696fd-4e30-45a5-b4d4-38342d5102ed/backup/'
-    pattern = r'(^[0-9]+)'
+    # pattern = r'(^[0-9]+)'
     fdel = []
     for name in os.listdir(backupdir):
         fullname = os.path.join(backupdir, name)
@@ -26,7 +26,8 @@ def test():
             if name.startswith('backup_') and name.endswith('.tgz'):
                 fdate = datetime.datetime.fromtimestamp(os.path.getmtime(fullname)).date()
                 curdate = datetime.datetime.today().date()
-                if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                # if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                if (curdate - fdate).days >= int(days):
                     fdel.append(fullname)
     with open('/media/7dc696fd-4e30-45a5-b4d4-38342d5102ed/backup/delarc.log', 'a', encoding='utf-8') as file:
         file.write('\n -test- {} -test- \n'.format(datetime.datetime.today().date()))
@@ -37,7 +38,7 @@ def test():
 
 def deltgz():
     backupdir = '/media/7dc696fd-4e30-45a5-b4d4-38342d5102ed/backup/'
-    pattern = r'(^[0-9]+)'
+    # pattern = r'(^[0-9]+)'
     count = 0
     fdel = []
     for name in os.listdir(backupdir):
@@ -46,7 +47,8 @@ def deltgz():
             if name.startswith('backup_') and name.endswith('.tgz'):
                 fdate = datetime.datetime.fromtimestamp(os.path.getmtime(fullname)).date()
                 curdate = datetime.datetime.today().date()
-                if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                # if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                if (curdate - fdate).days >= int(days):
                     fdel.append(fullname)
                     count += 1
     with open('/media/7dc696fd-4e30-45a5-b4d4-38342d5102ed/backup/delarc.log', 'a', encoding='utf-8') as file:
