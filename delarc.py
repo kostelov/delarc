@@ -2,7 +2,7 @@
 import os
 import sys
 import datetime
-from re import match
+# from re import match
 
 
 def hlp():
@@ -16,7 +16,7 @@ def hlp():
 
 
 def test():
-    pattern = r'(^[0-9]+)'
+    # pattern = r'(^[0-9]+)'
     fdel = []
     for name in os.listdir(os.getcwd()):
         fullname = os.path.join(os.getcwd(), name)
@@ -24,7 +24,8 @@ def test():
             if name.startswith('backup_') and name.endswith('.tgz'):
                 fdate = datetime.datetime.fromtimestamp(os.path.getmtime(name)).date()
                 curdate = datetime.datetime.today().date()
-                if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                # if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                if (curdate - fdate).days >= int(days):
                     fdel.append(name)
     with open('delarc.log', 'a', encoding='utf-8') as file:
         file.write('\n -test- {} -test- \n'.format(datetime.datetime.today().date()))
@@ -33,7 +34,7 @@ def test():
 
 
 def deltgz():
-    pattern = r'(^[0-9]+)'
+    # pattern = r'(^[0-9]+)'
     count = 0
     fdel = []
     for name in os.listdir(os.getcwd()):
@@ -42,7 +43,8 @@ def deltgz():
             if name.startswith('backup_') and name.endswith('.tgz'):
                 fdate = datetime.datetime.fromtimestamp(os.path.getmtime(name)).date()
                 curdate = datetime.datetime.today().date()
-                if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                # if int(match(pattern, str(curdate - fdate)).group()) >= int(days):
+                if (curdate - fdate).days >= int(days):
                     fdel.append(name)
                     count += 1
     with open('delarc.log', 'a', encoding='utf-8') as file:
